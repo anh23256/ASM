@@ -70,3 +70,7 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule . index.php [L]
     ```
+
+## Đặt tên file
+
+Tên file trong Models không có "s" ở cuối bvaf viết hoa chữ cái đầu
