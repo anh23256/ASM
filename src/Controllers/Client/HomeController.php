@@ -9,7 +9,7 @@ class HomeController extends Controller
     public function index() {
         $name = 'Salessa';
 
-        $this->renderViewClient('home', [
+        $this->renderViewClient('index', [
             'name' => $name
         ]);
     }
