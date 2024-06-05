@@ -50,7 +50,6 @@ class Model
         $queryBuilder = clone($this->queryBuilder);
 
         $totalPage = ceil($this->count() / $perPage);
-
         $offSet = $perPage * ($page - 1);
 
         // perPage số lượng bản ghi muốn lấy ra
@@ -67,7 +66,6 @@ class Model
         // 8
         // 9 
         // 10 -> 9 ( offSet =  9)
-
 
         $data = $queryBuilder
             ->select("*")
