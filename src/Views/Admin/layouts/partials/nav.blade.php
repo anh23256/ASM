@@ -20,13 +20,18 @@
             </ul>
         </li>
 
-        <li class>
-            <a href="Board.html" aria-expanded="false">
+        <li class="mm-active">
+            <a class="has-arrow" href="#" aria-expanded="false">
                 <div class="icon_menu">
                     <img src="{{ asset('assets/admin/img/menu-icon/5.svg') }}" alt>
                 </div>
                 <span>Board</span>
             </a>
+            <ul>
+                <li><a class="active" href="{{url('admin/products')}}">Danh sách sản phẩm</a></li>
+                <li><a href="index_2.html">Thêm mới sản phẩm</a></li>
+                <li><a href="index_3.html">Cập nhật sản phẩm</a></li>
+            </ul>
         </li>
 
     </ul>
