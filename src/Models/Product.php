@@ -21,7 +21,7 @@ class Product extends Model
                 'c.name as c_name'
             )
             ->from($this->tableName, 'p')
-            ->innerJoin('p', 'categorys', 'c', 'c.id = p.category_id')
+            ->innerJoin('p', 'categories', 'c', 'c.id = p.category_id')
             ->orderBy('p.id', 'desc')
             ->fetchAllAssociative();
     }
@@ -59,7 +59,7 @@ class Product extends Model
                 'c.name as c_name'
             )
             ->from($this->tableName, 'p')
-            ->innerJoin('p', 'categorys', 'c', 'c.id = p.category_id')
+            ->innerJoin('p', 'categories', 'c', 'c.id = p.category_id')
             ->setFirstResult($offSet)
             ->setMaxResults($perPage)
             ->orderBy('p.id', 'desc')
