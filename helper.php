@@ -2,6 +2,7 @@
 
 const PATH_ASSET = __DIR__ . '/assets/' ;
 
+// PATH_ROOT :  lấy đường dẫn tuyện đối  để tránh rủ do về việc thay đổi đường dẫn thư mục 
 const PATH_ROOT = __DIR__ . '/' ;
 
 if (!function_exists('show_upload')) {
