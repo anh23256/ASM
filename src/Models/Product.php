@@ -13,7 +13,7 @@ class Product extends Model
     {
         return $this->queryBuilder
             ->select(
-                'p.id' . 'p.category_id',
+                'p.id' , 'p.category_id',
                 'p.name',
                 'p.img_thumbnail',
                 'p.created_at',
@@ -21,7 +21,7 @@ class Product extends Model
                 'c.name as c_name'
             )
             ->from($this->tableName, 'p')
-            ->innerJoin('p', 'categorys', 'c', 'c.id = p.category_id')
+            ->innerJoin('p', 'categories', 'c', 'c.id = p.category_id')
             ->orderBy('p.id', 'desc')
             ->fetchAllAssociative();
     }
@@ -51,7 +51,7 @@ class Product extends Model
 
         $data = $queryBuilder
             ->select(
-                'p.id' . 'p.category_id',
+                'p.id' , 'p.category_id',
                 'p.name',
                 'p.img_thumbnail',
                 'p.created_at',
@@ -59,7 +59,7 @@ class Product extends Model
                 'c.name as c_name'
             )
             ->from($this->tableName, 'p')
-            ->innerJoin('p', 'categorys', 'c', 'c.id = p.category_id')
+            ->innerJoin('p', 'categories', 'c', 'c.id = p.category_id')
             ->setFirstResult($offSet)
             ->setMaxResults($perPage)
             ->orderBy('p.id', 'desc')

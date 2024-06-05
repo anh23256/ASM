@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
 
-<!-- Mirrored from demo.dashboardpack.com/sales-html/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 24 May 2024 07:23:13 GMT -->
+<!-- Mirrored from demo.dashboardpack.com/sales-html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 24 May 2024 07:24:13 GMT -->
 
 <head>
 
@@ -9,7 +9,7 @@
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
  <title><?php echo $this->yieldContent('title'); ?></title>
 
- <?php echo $this->runChild('layouts.partials.head'); ?>
+ <?php echo $this->runChild('layouts.partials.css'); ?>
 </head>
 
 <body class="crm_body_bg">
@@ -32,15 +32,16 @@
  <?php echo $this->runChild('layouts.partials.footer'); ?>
  </section>
 
+
  <div id="back-top" style="display: none;">
  <a title="Go to Top" href="#">
  <i class="ti-angle-up"></i>
  </a>
  </div>
 
- <?php echo $this->runChild('layouts.partials.script'); ?>
-
- <?php echo $this->yieldContent('script'); ?>
+ <?php echo $this->runChild('layouts.partials.js'); ?>
 </body>
+
+<!-- Mirrored from demo.dashboardpack.com/sales-html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 24 May 2024 07:24:13 GMT -->
 
 </html>

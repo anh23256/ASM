@@ -158,8 +158,10 @@ class ProductController extends Controller
             if (!empty($_FILES['img_thumbnail']) && $_FILES['img_thumbnail']['size'] > 0) {
 
                 $from = $_FILES['img_thumbnail']['tmp_name'];
+                // to là đường dẫn tới nơi lưu trữ file
                 $to   = 'assets/uploads/' . time() . $_FILES['img_thumbnail']['name'];
 
+                
                 if (move_uploaded_file($from, PATH_ROOT . $to)) {
                     $data['img_thumbnail'] = $to;
                 } else {

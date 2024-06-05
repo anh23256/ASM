@@ -38,6 +38,7 @@
                                     <th>IMAGE</th>
                                     <th>NAME</th>
                                     <th>EMAIL</th>
+                                    <th>TYPE</th>
                                     <th>CREATED AT</th>
                                     <th>UPDATED AT</th>
                                     <th>ACTION</th>
@@ -47,14 +48,19 @@
 
                                 @foreach ($users as $user)
                                     <tr>
-                                        <td><?= $user['id'] ?></td>
+                                        <td>{{ $user['id'] }}</td>
                                         <td>
                                             <img src="{{ asset($user['avatar']) }}" alt="" width="100px">
                                         </td>
-                                        <td><?= $user['name'] ?></td>
-                                        <td><?= $user['email'] ?></td>
-                                        <td><?= $user['created_at'] ?></td>
-                                        <td><?= $user['updated_at'] ?></td>
+                                        <td>{{ $user['name'] }}</td>
+                                        <td>{{ $user['email'] }}</td>
+                                        <td>
+                                            {!!  $user['type'] == 'admin' 
+                                                    ? '<span class="badge bg-primary">admin</span>'
+                                                        : '<span class="badge bg-warning">member</span>' !!}
+                                        </td>
+                                        <td>{{ $user['created_at'] }}</td>
+                                        <td>{{ $user['updated_at'] }}</td>
                                         <td>
 
                                             <a class="btn btn-info"
