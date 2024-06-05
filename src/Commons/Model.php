@@ -79,7 +79,7 @@ class Model
             ->fetchAllAssociative();
         return [$data, $totalPage];
     }
-    public function find($id)
+    public function findByID($id)
     {
         return $this->queryBuilder
             ->select('*')
