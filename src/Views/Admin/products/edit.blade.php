@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-Thêm mới Sản phẩm
+Cập nhật sản phẩm: {{ $product['name'] }}
 @endsection
 
 @section('content')
@@ -17,18 +17,27 @@ Thêm mới Sản phẩm
 unset($_SESSION['errors']);
 @endphp
 @endif
+
+@if (isset($_SESSION['status']) && $_SESSION['status'])
+<div class="alert alert-success">{{ $_SESSION['msg'] }}</div>
+
+@php
+unset($_SESSION['status']);
+unset($_SESSION['msg']);
+@endphp
+@endif
 <div class="row justify-content-center">
     <div class="col-lg-12">
         <div class="white_card card_height_100 mb_30">
             <div class="white_card_header">
                 <div class="box_header m-0">
                     <div class="main-title">
-                        <h1 class="m-0">Thêm mới sản phẩm</h1>
+                        <h1 class="m-0">Cập nhật sản phẩm: {{ $product['name'] }}</h1>
                     </div>
                 </div>
             </div>
             <div class="white_card_body">
-                <form action="{{ url('admin/products/store') }}" enctype="multipart/form-data" method="POST">
+                <form action="{{ url("admin/products/{$product['id']}/update") }}" enctype="multipart/form-data" method="POST">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3 mt-3">
@@ -36,34 +45,35 @@ unset($_SESSION['errors']);
 
                                 <select name="category_id" id="category_id" class="form-select">
                                     @foreach ($categoryPluck as $id => $name)
-                                    <option value="{{ $id }}">{{ $name }}</option>
+                                    <option @if ($product['category_id']==$id) selected @endif value="{{ $id }}">{{ $name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="mb-3 mt-3">
                                 <label for="name" class="form-label">Name:</label>
-                                <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+                                <input type="text" class="form-control" id="name" placeholder="Enter name" value="{{ $product['name'] }}" name="name">
                             </div>
                             <div class="mb-3 mt-3">
                                 <label for="img_thumbnail" class="form-label">Img Thumbnail:</label>
                                 <input type="file" class="form-control" id="img_thumbnail" placeholder="Enter img_thumbnail" name="img_thumbnail">
+                                <img src="{{ asset($product['img_thumbnail']) }}" width="100px" alt="">
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="mb-3 mt-3">
                                 <label for="overview" class="form-label">Overview:</label>
-                                <textarea class="form-control" id="overview" placeholder="Enter overview" name="overview"></textarea>
+                                <textarea class="form-control" id="overview" placeholder="Enter overview" name="overview">{{ $product['overview'] }}</textarea>
                             </div>
 
                             <div class="mb-3 mt-3">
                                 <label for="content" class="form-label">Content:</label>
-                                <textarea class="form-control" id="content" rows="4" placeholder="Enter content" name="content"></textarea>
+                                <textarea class="form-control" id="content" rows="4" placeholder="Enter content" name="content">{{ $product['content'] }}</textarea>
                             </div>
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary mt-5">Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </div>
