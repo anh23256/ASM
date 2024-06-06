@@ -136,17 +136,18 @@
                 <div class="col-6 col-md-4 col-xl-3">
                     <div class="grid_item">
                         <figure>
-                            <a href="product-detail-1.html">
+                            <a href="{{url('products-detail/').$product['id']}}">
                                 <img class="img-fluid lazy" style="height: 250px;"
                                     src="{{ url($product['img_thumbnail']) }}" alt="">
                             </a>
                             <div data-countdown="2019/05/15" class="countdown"></div>
                         </figure>
-                        <a href="product-detail-1.html">
+                        <a href="{{url('products-detail/').$product['id']}}">
                             <h3>{{ $product['name'] }}</h3>
                         </a>
                         <div class="price_box">
-                            <span class="new_price">$48.00</span>
+                            <span class="new_price">{{number_format($product['price_sale']??0)}}VND</span>
+                            <span class="old_price">{{number_format($product['price_regular']??0)}}VND</span>
                         </div>
                         <ul>
                             <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left"
@@ -161,19 +162,27 @@
 
             <div class="pagination__wrapper">
                 <ul class="pagination">
-                    <li><a href="{{ url('products?page=' . ($page - 1 <= 0 ? 1 : $page - 1)) }}" class="prev"
+                    @if ($page>1)
+                    <li><a href="{{ url('products?page=' . ($page - 1 == 0 ? 1 : $page - 1)) }}" class="prev"
                             title="previous page">&#10094;</a></li>
+                    @endif
                     @for ($i = 1; $i <= $totalPage; $i++)
                         <li>
                             <a href="{{ url('products?page=' . $i) }}"
                                 class="{{ $page == $i ? 'active' : '' }}">{{ $i }}</a>
                         </li>
                     @endfor
+                    @if ($page<$totalPage)
                     <li><a href="{{ url('products?page=' . ($page + 1 > $totalPage ? $totalPage : $page + 1)) }}"
                             class="next" title="next page">&#10095;</a></li>
+                    @endif
                 </ul>
             </div>
 
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script src="{{url('assets/Client/js/sticky_sidebar.min.js')}}"></script>
+    <script src="{{url('assets/Client/js/specific_listing.js')}}"></script>
 @endsection

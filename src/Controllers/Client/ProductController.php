@@ -7,9 +7,13 @@ use XuongOop\Salessa\Models\Product;
 
 class ProductController extends Controller
 {
-    public function index() {
+    public function products() {
         $product = new Product();
         $page = $_GET['page'] ?? 1;
+        if($page<=0){
+            header('Location:'.url('products'));
+            exit;
+        }
         [$products,$totalPage] = $product->paginate($page, 8);
         // Helper::debug($products);
         $this->renderViewClient('products.listProducts', [

@@ -23,15 +23,15 @@
                     </div>
                     <ul>
                         <li>
-                            <a href="index.html">Trang chủ</a>
+                            <a href="{{url('')}}">Trang chủ</a>
                         </li>
 
                         <li>
-                            <a href="listing-grid-1-full.html">Sản phẩm</a>
+                            <a href="{{url('products')}}">Sản phẩm</a>
                         </li>
-                        <li><a href="about.html">Giới thiệu</a></li>
-                        <li><a href="account.html">Tạo tài khoản</a></li>
-                        <li><a href="help.html">Trợ giúp</a></li>
+                        <li><a href="{{url('')}}">Giới thiệu</a></li>
+                        <li><a href="{{url('')}}">Tạo tài khoản</a></li>
+                        <li><a href="{{url('')}}">Trợ giúp</a></li>
                     </ul>
                 </div>
                 <!--/main-menu -->

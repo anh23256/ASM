@@ -100,7 +100,8 @@
                             <h3>{{ $product['name'] }}</h3>
                         </a>
                         <div class="price_box">
-                            <span class="new_price"></span>
+                            <span class="new_price">{{number_format($product['price_sale'] ?? $product['price_regular'])}}VND</span>
+                            <span class="old_price">{{number_format($product['price_regular']??0)}}VND</span>
                         </div>
                         <ul>
                             <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left"
@@ -166,7 +167,8 @@
                             <h3>{{ $product['name'] }}</h3>
                         </a>
                         <div class="price_box">
-                            <span class="new_price">$110.00</span>
+                            <span class="new_price">{{number_format($product['price_sale'] ?? $product['price_regular'])}}VND</span>
+                            <span class="old_price">{{number_format($product['price_regular']??0)}}VND</span>
                         </div>
                         <ul>
                             <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left"
@@ -186,4 +188,7 @@
         </div>
         <!-- /products_carousel -->
     </div>
+@endsection
+@section('scripts')
+    <script src="{{asset('assets/Client/js/carousel-home-2.js')}}"></script>
 @endsection

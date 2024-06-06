@@ -52,7 +52,7 @@ class Product extends Model
         $data = $queryBuilder
             ->select(
                 'p.id' , 'p.category_id',
-                'p.name',
+                'p.name', 'p.price_regular','p.price_sale',
                 'p.img_thumbnail',
                 'p.created_at',
                 'p.updated_at',
@@ -66,5 +66,17 @@ class Product extends Model
             ->fetchAllAssociative();
 
         return [$data, $totalPage];
+    }
+    //sản phẩm liên quan
+    public function productsTogetherCategory($id,$category_id){
+        return $this->queryBuilder
+        ->select('*')
+        ->from($this->tableName)
+        ->where('category_id = ? ')
+        ->andWhere('id <> ?')
+        ->setParameter(0, $category_id) // xuất hiện 1 lần nên truyền số không vào 
+        ->setParameter(1,$id)
+        // doctrine sẽ đếm từ 0
+        ->fetchAllAssociative();
     }
 }

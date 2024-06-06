@@ -26,4 +26,3 @@
 	<link href="{{asset('assets/Client/css/cart.css')}}" rel="stylesheet">
 	<!-- YOUR CUSTOM CSS -->
 	<link href="{{asset('assets/Client/css/custom.css')}}" rel="stylesheet">
-	<link href="{{asset('assets/Client/css/checkout.css')}}" rel="stylesheet">
