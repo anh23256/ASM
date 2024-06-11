@@ -4,7 +4,8 @@
         <div class="row small-gutters">
             <div class="col-xl-3 col-lg-3 d-lg-flex align-items-center">
                 <div id="logo">
-                    <a href="index.html"><img src="{{asset('assets/Client/img/logo.svg')}}" alt="" width="100" height="35"></a>
+                    <a href="index.html"><img src="{{ asset('assets/Client/img/logo.svg') }}" alt="" width="100"
+                            height="35"></a>
                 </div>
             </div>
             <nav class="col-xl-6 col-lg-7">
@@ -18,20 +19,21 @@
                 <!-- Menu -->
                 <div class="main-menu">
                     <div id="header_menu">
-                        <a href="index.html"><img src="{{asset('assets/Client/img/logo_black.svg')}}" alt="" width="100" height="35"></a>
+                        <a href="index.html"><img src="{{ asset('assets/Client/img/logo_black.svg') }}" alt=""
+                                width="100" height="35"></a>
                         <a href="#" class="open_close" id="close_in"><i class="ti-close"></i></a>
                     </div>
                     <ul>
                         <li>
-                            <a href="{{url('')}}">Trang chủ</a>
+                            <a href="{{ url('') }}">Trang chủ</a>
                         </li>
 
                         <li>
-                            <a href="{{url('products')}}">Sản phẩm</a>
+                            <a href="{{ url('products') }}">Sản phẩm</a>
                         </li>
-                        <li><a href="{{url('')}}">Giới thiệu</a></li>
-                        <li><a href="{{url('')}}">Tạo tài khoản</a></li>
-                        <li><a href="{{url('')}}">Trợ giúp</a></li>
+                        <li><a href="{{ url('') }}">Giới thiệu</a></li>
+                        <li><a href="{{ url('') }}">Tạo tài khoản</a></li>
+                        <li><a href="{{ url('') }}">Trợ giúp</a></li>
                     </ul>
                 </div>
                 <!--/main-menu -->
@@ -64,15 +66,15 @@
                             <div id="menu">
                                 <ul>
                                     <li>
-                                        <a href="{{url('')}}">Trang chủ</a>
+                                        <a href="{{ url('') }}">Trang chủ</a>
                                     </li>
 
                                     <li>
-                                        <a href="{{url('products')}}">Sản phẩm</a>
+                                        <a href="{{ url('products') }}">Sản phẩm</a>
                                     </li>
-                                    <li><a href="{{url('')}}">Giới thiệu</a></li>
-                                    <li><a href="{{url('')}}">Tạo tài khoản</a></li>
-                                    <li><a href="{{url('')}}">Trợ giúp</a></li>
+                                    <li><a href="{{ url('') }}">Giới thiệu</a></li>
+                                    <li><a href="{{ url('') }}">Tạo tài khoản</a></li>
+                                    <li><a href="{{ url('') }}">Trợ giúp</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -95,7 +97,10 @@
                                 <ul>
                                     <li>
                                         <a href="product-detail-1.html">
-                                            <figure><img src="{{asset('assets/Client/img/products/product_placeholder_square_small.jpg')}}" data-src="img/products/shoes/thumb/1.jpg" alt="" width="50" height="50" class="lazy"></figure>
+                                            <figure><img
+                                                    src="{{ asset('assets/Client/img/products/product_placeholder_square_small.jpg') }}"
+                                                    data-src="img/products/shoes/thumb/1.jpg" alt=""
+                                                    width="50" height="50" class="lazy"></figure>
                                             <strong><span>1x Armor Air x Fear</span>$90.00</strong>
                                         </a>
                                         <a href="#0" class="action"><i class="ti-trash"></i></a>
@@ -103,7 +108,8 @@
                                 </ul>
                                 <div class="total_drop">
                                     <div class="clearfix"><strong>Tổng</strong><span>$200.00</span></div>
-                                    <a href="cart.html" class="btn_1 outline">Giỏ hàng</a><a href="checkout.html" class="btn_1">Thanh toán</a>
+                                    <a href="cart.html" class="btn_1 outline">Giỏ hàng</a><a href="checkout.html"
+                                        class="btn_1">Thanh toán</a>
                                 </div>
                             </div>
                         </div>
@@ -114,22 +120,41 @@
                     </li>
                     <li>
                         <div class="dropdown dropdown-access">
-                            <a href="account.html" class="access_link"><span>Tài khoản</span></a>
+                            <a href="#" class="access_link"><span>Tài khoản</span></a>
                             <div class="dropdown-menu">
-                                <a href="account.html" class="btn_1">Đăng nhập hoặc đăng ký</a>
+                                @if (empty($_SESSION['users']))
+                                    <a href="{{ url('login&singin') }}" class="btn_1">Đăng nhập hoặc đăng ký</a>
+                                @else
+                                    <a href="#" class="btn_1">Xin chào: {{ $_SESSION['users']['name'] }}</a>
+                                @endif
                                 <ul>
                                     <li>
-                                        <a href="account.html"><i class="ti-package"></i>Giỏ hàng của
-                                            tôi</a>
+                                        <form action="{{ url('cart') }}" method="POST">
+                                            <button type="submit" style="border: none; background: none; width: 100%; display: flex;"><a><i class="ti-package"></i>Giỏ hàng của
+                                                tôi</a></button>
+                                        </form>
                                     </li>
+                                    @if (!empty($_SESSION['users']))
+                                        <li>
+                                            <a href="{{ url('account') }}"><i class="ti-user"></i>Thông tin tài
+                                                khoản</a>
+                                        </li>
+                                    @endif
+                                    @if (!empty($_SESSION['users']))
+                                        <li>
+                                            <a href="{{ url('historyOrder') }}"><i class="ti-user"></i>Lịch sử mua
+                                                hàng</a>
+                                        </li>
+                                    @endif
                                     <li>
-                                        <a href="account.html"><i class="ti-user"></i>Thông tin tài
-                                            khoản</a>
-                                    </li>
-                                    <li>
-                                        <a href="help.html"><i class="ti-help-alt"></i>Trợ giúp và câu hỏi
+                                        <a href="#"><i class="ti-help-alt"></i>Trợ giúp và câu hỏi
                                             thường gặp</a>
                                     </li>
+                                    @if (!empty($_SESSION['users']))
+                                        <li>
+                                            <a href="{{ url('logout') }}"><i class=" ti-signal"></i>Đăng xuất</a>
+                                        </li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>

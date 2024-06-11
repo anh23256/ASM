@@ -7,76 +7,37 @@ use XuongOop\Salessa\Commons\Model;
 class Product extends Model
 {
     protected string $tableName = 'products';
-
-    // hiển thị tên danh mục 
-    public function all()
-    {
-        return $this->queryBuilder
-            ->select(
-                'p.id' , 'p.category_id',
-                'p.name',
-                'p.img_thumbnail',
-                'p.created_at',
-                'p.updated_at',
-                'c.name as c_name'
-            )
-            ->from($this->tableName, 'p')
-            ->innerJoin('p', 'categories', 'c', 'c.id = p.category_id')
-            ->orderBy('p.id', 'desc')
-            ->fetchAllAssociative();
-    }
-
-    public function paginate($page = 1, $perPage = 5)
-    {
-        $queryBuilder = clone ($this->queryBuilder);
-
-        $totalPage = ceil($this->count() / $perPage);
-
-        $offSet = $perPage * ($page - 1);
-
-        // perPage số lượng bản ghi muốn lấy ra
-        // với page = 1
-        // 1 -> 0 () đếm theo vị trí index
-        // 2
-        // 3
-        // 4 
-        // 5 -> 4 ( offSet = 4 )
-
-        // với page = 2
-        // 6 -> 5 ()
-        // 7
-        // 8
-        // 9 
-        // 10 -> 9 ( offSet =  9)
-
-        $data = $queryBuilder
-            ->select(
-                'p.id' , 'p.category_id',
-                'p.name', 'p.price_regular','p.price_sale',
-                'p.img_thumbnail',
-                'p.created_at',
-                'p.updated_at',
-                'c.name as c_name'
-            )
-            ->from($this->tableName, 'p')
-            ->innerJoin('p', 'categories', 'c', 'c.id = p.category_id')
-            ->setFirstResult($offSet)
-            ->setMaxResults($perPage)
-            ->orderBy('p.id', 'desc')
-            ->fetchAllAssociative();
-
-        return [$data, $totalPage];
-    }
     //sản phẩm liên quan
-    public function productsTogetherCategory($id,$category_id){
+    public function productsTogetherCategory($id, $category_id)
+    {
         return $this->queryBuilder
-        ->select('*')
-        ->from($this->tableName)
-        ->where('category_id = ? ')
-        ->andWhere('id <> ?')
-        ->setParameter(0, $category_id) // xuất hiện 1 lần nên truyền số không vào 
-        ->setParameter(1,$id)
-        // doctrine sẽ đếm từ 0
-        ->fetchAllAssociative();
+            ->select('*')
+            ->from($this->tableName)
+            ->where('category_id = ? ')
+            ->andWhere('id <> ?')
+            ->setParameter(0, $category_id) // xuất hiện 1 lần nên truyền số không vào 
+            ->setParameter(1, $id)
+            // doctrine sẽ đếm từ 0
+            ->fetchAllAssociative();
+    }
+    public function countProductsByCategory($category_id, $categorie_name)
+    {
+        $data =  $this->queryBuilder
+            ->select('COUNT(*) as sosp')
+            ->from($this->tableName)
+            ->where('category_id = ? ')
+            ->setParameter(0, $category_id) // xuất hiện 1 lần nên truyền số không vào 
+            // doctrine sẽ đếm từ 0
+            ->fetchAllAssociative();
+        return [$categorie_name, $data[0]['sosp']];
+    }
+    public function updateCategoryProduct($category_id)
+    {
+        $this->queryBuilder->update($this->tableName)
+            ->set('category_id', '?')
+            ->where('category_id  = ?')
+            ->setParameter(0, null)
+            ->setParameter(1, $category_id)
+            ->executeQuery();
     }
 }

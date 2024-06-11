@@ -59,7 +59,13 @@
                                             <img src="{{ asset($product['img_thumbnail']) }}" width="100px" alt="">
                                         </td>
                                         <td>{{ $product['name'] }}</td>
-                                        <td>{{ $product['c_name'] }}</td>
+                                        <td>
+                                            @foreach ($categorys as $item)
+                                                @if ($item['id'] == $product['category_id'])
+                                                    {{$item['name']}}
+                                                @endif
+                                            @endforeach
+                                        </td>
                                         <td>{{ $product['created_at'] }}</td>
                                         <td>{{ $product['updated_at'] }}</td>
                                         <td>

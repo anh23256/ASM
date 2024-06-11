@@ -72,7 +72,18 @@ unset($_SESSION['msg']);
                             </div>
                         </div>
                     </div>
-
+                    <div class="col-md-6">
+                        <div class="mb-3 mt-3">
+                            <label for="price_regular" class="form-label">Price_regular:</label>
+                            <input type="text" class="form-control" id="price_regular" placeholder="Enter price_regular" name="price_regular" value="{{ $product['price_regular'] }}">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3 mt-3">
+                            <label for="price_sale" class="form-label">Price_sale:</label>
+                            <input type="text" class="form-control" id="price_sale" rows="4" placeholder="Enter price_sale" name="price_sale" value="{{ $product['price_sale'] ?? '' }}">
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>

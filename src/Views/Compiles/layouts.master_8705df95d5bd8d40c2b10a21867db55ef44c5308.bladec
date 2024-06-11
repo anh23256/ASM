@@ -10,6 +10,8 @@
  <title><?php echo $this->yieldContent('title'); ?></title>
 
  <?php echo $this->runChild('layouts.partials.css'); ?>
+ <?php echo $this->yieldContent('css'); ?>
+ <?php echo $this->yieldContent('scripts'); ?>
 </head>
 
 <body class="crm_body_bg">
@@ -40,6 +42,7 @@
  </div>
 
  <?php echo $this->runChild('layouts.partials.js'); ?>
+ <?php echo $this->yieldContent('script'); ?>
 </body>
 
 <!-- Mirrored from demo.dashboardpack.com/sales-html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 24 May 2024 07:24:13 GMT -->

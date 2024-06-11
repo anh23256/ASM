@@ -9,6 +9,7 @@
 	<meta name="author" content="Ansonika">
 	<title>@yield('title')</title>
 	@include('layouts.partials.head')
+	@yield('css')
 </head>
 
 <body>

@@ -208,7 +208,7 @@
 			if (oldValue > 1) {
 				var newVal = parseFloat(oldValue) - 1;
 			} else {
-				newVal = 0;
+				var newVal = parseFloat(oldValue);
 			}
 		}
 		$button.parent().find("input").val(newVal);

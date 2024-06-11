@@ -1,5 +1,8 @@
 # Làm việc với GIT
-
+9704198526191432198
+NGUYEN VAN A
+07/15
+123456
 ## Cài đặt môi trường
 - Cài GIT SCM
 

@@ -3,6 +3,23 @@
    @section('title')
        Chi tiết sản phẩm
    @endsection
+   @section('css')
+       <link href="{{ asset('assets/Client/css/product_page.css') }}" rel="stylesheet">
+       <style>
+           .btn-no-border-bg {
+               border: none;
+               /* Loại bỏ viền */
+               height: 2vw;
+               cursor: pointer;
+               /* Đổi con trỏ thành con trỏ chuột */
+           }
+
+           .btn-no-border-bg:hover {
+               background-color: blue;
+               color: white;
+           }
+       </style>
+   @endsection
    @section('content')
        <div>
            <div class="container margin_30">
@@ -13,24 +30,36 @@
                            <div class="slider">
 
                                <div class="owl-carousel owl-theme main">
-                                   <div style="background-image: url({{asset($productDetail['img_thumbnail'])}})" class="item-box"></div>
-                                   <div style="background-image: url({{asset($productDetail['img_thumbnail'])}})" class="item-box"></div>
-                                   <div style="background-image: url({{asset($productDetail['img_thumbnail'])}})" class="item-box"></div>
-                                   <div style="background-image: url({{asset($productDetail['img_thumbnail'])}})" class="item-box"></div>
-                                   <div style="background-image: url({{asset($productDetail['img_thumbnail'])}})" class="item-box"></div>
-                                   <div style="background-image: url({{asset($productDetail['img_thumbnail'])}})" class="item-box"></div>
+                                   <div style="background-image: url({{ asset($productDetail['img_thumbnail']) }})"
+                                       class="item-box"></div>
+                                   <div style="background-image: url({{ asset($productDetail['img_thumbnail']) }})"
+                                       class="item-box"></div>
+                                   <div style="background-image: url({{ asset($productDetail['img_thumbnail']) }})"
+                                       class="item-box"></div>
+                                   <div style="background-image: url({{ asset($productDetail['img_thumbnail']) }})"
+                                       class="item-box"></div>
+                                   <div style="background-image: url({{ asset($productDetail['img_thumbnail']) }})"
+                                       class="item-box"></div>
+                                   <div style="background-image: url({{ asset($productDetail['img_thumbnail']) }})"
+                                       class="item-box"></div>
                                </div>
                                <div class="left nonl"><i class="ti-angle-left"></i></div>
                                <div class="right"><i class="ti-angle-right"></i></div>
                            </div>
                            <div class="slider-two">
                                <div class="owl-carousel owl-theme thumbs">
-                                   <div style="background-image: url({{asset($productDetail['img_thumbnail'])}})" class="item active"></div>
-                                   <div style="background-image: url({{asset($productDetail['img_thumbnail'])}})" class="item"></div>
-                                   <div style="background-image: url({{asset($productDetail['img_thumbnail'])}})" class="item"></div>
-                                   <div style="background-image: url({{asset($productDetail['img_thumbnail'])}})" class="item"></div>
-                                   <div style="background-image: url({{asset($productDetail['img_thumbnail'])}})" class="item"></div>
-                                   <div style="background-image: url({{asset($productDetail['img_thumbnail'])}})" class="item"></div>
+                                   <div style="background-image: url({{ asset($productDetail['img_thumbnail']) }})"
+                                       class="item active"></div>
+                                   <div style="background-image: url({{ asset($productDetail['img_thumbnail']) }})"
+                                       class="item"></div>
+                                   <div style="background-image: url({{ asset($productDetail['img_thumbnail']) }})"
+                                       class="item"></div>
+                                   <div style="background-image: url({{ asset($productDetail['img_thumbnail']) }})"
+                                       class="item"></div>
+                                   <div style="background-image: url({{ asset($productDetail['img_thumbnail']) }})"
+                                       class="item"></div>
+                                   <div style="background-image: url({{ asset($productDetail['img_thumbnail']) }})"
+                                       class="item"></div>
                                </div>
                                <div class="left-t nonl-t"></div>
                                <div class="right-t"></div>
@@ -40,7 +69,7 @@
                    <div class="col-md-6">
                        <div class="breadcrumbs">
                            <ul>
-                               <li><a href="{{url('')}}">Trang chủ</a></li>
+                               <li><a href="{{ url('') }}">Trang chủ</a></li>
                                <li><a href="#">Danh mục</a></li>
                                <li>Sản phẩm chi tiết</li>
                            </ul>
@@ -49,41 +78,38 @@
 
                        <!-- thông tin sản phẩm -->
                        <div class="prod_info">
-                           <h1>{{$productDetail['name']}}</h1>
-                           <p><small>SKU: {{$productDetail['id']}}</small><br></p>
-                           <div class="prod_options">
-                               <div class="row">
-                                   <label class="col-xl-5 col-lg-5 col-md-6 col-6"><strong>Size</strong> - Size Guide <a
-                                           href="#0" data-bs-toggle="modal" data-bs-target="#size-modal"><i
-                                               class="ti-help-alt"></i></a></label>
-                                   <div class="col-xl-4 col-lg-5 col-md-6 col-6">
-                                       <div class="custom-select-form">
-                                           <select class="wide">
-                                               <option value="" selected>Cỡ đại</option>
-                                               <option value="">Cỡ nhỏ</option>
-                                           </select>
+                           <form action="{{ url('cart') }}" method="POST">
+                               <h1>{{ $productDetail['name'] }}</h1>
+                               <p><small>SKU: {{ $productDetail['id'] }}</small><br></p>
+                               <div class="prod_options">
+                                   <div class="row">
+                                       <label class="col-xl-5 col-lg-5  col-md-6 col-6"><strong>Số lượng</strong></label>
+                                       <div class="col-xl-4 col-lg-5 col-md-6 col-6">
+                                           <div class="numbers-row">
+                                               <input type="text" min="1" data-min="1" value="1"
+                                                   id="Số lượng_1" name="quantity" class="qty2" name="Số lượng_1">
+                                           </div>
                                        </div>
                                    </div>
                                </div>
                                <div class="row">
-                                   <label class="col-xl-5 col-lg-5  col-md-6 col-6"><strong>Số lượng</strong></label>
-                                   <div class="col-xl-4 col-lg-5 col-md-6 col-6">
-                                       <div class="numbers-row">
-                                           <input type="text" value="1" id="Số lượng_1" class="qty2"
-                                               name="Số lượng_1">
+                                   <div class="col-lg-5 col-md-6">
+                                       <div class="price_main"><span
+                                               class="new_price">{{ number_format($productDetail['price_sale'] ?? $productDetail['price_regular']) }}VND</span><span
+                                               class="percentage">-{{ (1 - ($productDetail['price_sale'] ?? 0) / ($productDetail['price_regular'] ?? 0)) * 100 }}%</span>
+                                           <span
+                                               class="old_price">{{ number_format($productDetail['price_regular'] ?? 0) }}VND</span>
                                        </div>
                                    </div>
+                                   <div class="col-lg-4 col-md-6">
+                                       <input type="hidden" name="productID" value="{{ $productDetail['id'] }}">
+                                       <button style="border:none; background:none;" type="submit">
+                                           <div class="btn_add_to_cart"><a class="btn_1">Add to Cart</a>
+                                           </div>
+                                       </button>
+                                   </div>
                                </div>
-                           </div>
-                           <div class="row">
-                               <div class="col-lg-5 col-md-6">
-                                   <div class="price_main"><span class="new_price">{{number_format($productDetail['price_sale'] ?? $productDetail['price_regular'])}}VND</span><span
-                                           class="percentage">-{{(1-(($productDetail['price_sale']??0)/($productDetail['price_regular']??0)))*100}}%</span> <span class="old_price">{{number_format($productDetail['price_regular']??0)}}VND</span></div>
-                               </div>
-                               <div class="col-lg-4 col-md-6">
-                                   <div class="btn_add_to_cart"><a href="#0" class="btn_1">Add to Cart</a></div>
-                               </div>
-                           </div>
+                           </form>
                        </div>
                        <!-- /prod_info -->
 
@@ -111,8 +137,7 @@
            <div class="tab_content_wrapper">
                <div class="container">
                    <div class="tab-content" role="tablist">
-                       <div id="pane-A" class="card tab-pane fade active show" role="tabpanel"
-                           aria-labelledby="tab-A">
+                       <div id="pane-A" class="card tab-pane fade active show" role="tabpanel" aria-labelledby="tab-A">
                            <div class="card-header" role="tab" id="heading-A">
                                <h5 class="mb-0">
                                    <a class="collapsed" data-bs-toggle="collapse" href="#collapse-A"
@@ -126,10 +151,10 @@
                                    <div class="row justify-content-between">
                                        <div class="col-lg-6">
                                            <h3>Details</h3>
-                                           <p>{{$productDetail['overview']}}</p>
-                                               nobis
-                                               numquam principes ea eos, cu autem constituto suscipiantur eam. Ex graeci
-                                               elaboraret pro. Mei te omnis tantas, nobis viderer vivendo ex has.</p>
+                                           <p>{{ $productDetail['overview'] }}</p>
+                                           nobis
+                                           numquam principes ea eos, cu autem constituto suscipiantur eam. Ex graeci
+                                           elaboraret pro. Mei te omnis tantas, nobis viderer vivendo ex has.</p>
                                        </div>
                                        <div class="col-lg-5">
                                            <h3>Thông số sản phẩm</h3>
@@ -268,41 +293,41 @@
                    <!-- sản phẩm -->
                </div>
                <div class="owl-carousel owl-theme products_carousel">
-                @foreach ($productTogetherCatagorys as $item)
-                   <div class="item">
-                       <div class="grid_item">
-                           <span class="ribbon new">New</span>
-                           <figure>
-                               <a href="{{url('products-detail/').$item['id']}}">
-                                   <img class="owl-lazy" style="height: 250px" src="{{asset($item['img_thumbnail'])}}" data-src="{{asset($item['img_thumbnail'])}}"
-                                       alt="">
+                   @foreach ($productTogetherCatagorys as $item)
+                       <div class="item">
+                           <div class="grid_item">
+                               <span class="ribbon new">New</span>
+                               <figure>
+                                   <a href="{{ url('products-detail/') . $item['id'] }}">
+                                       <img class="owl-lazy" style="height: 250px"
+                                           src="{{ asset($item['img_thumbnail']) }}"
+                                           data-src="{{ asset($item['img_thumbnail']) }}" alt="">
+                                   </a>
+                               </figure>
+                               <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i
+                                       class="icon-star voted"></i><i class="icon-star voted"></i><i
+                                       class="icon-star"></i>
+                               </div>
+                               <a href="{{ url('products-detail/') . $item['id'] }}">
+                                   <h3>{{ $item['name'] }}</h3>
                                </a>
-                           </figure>
-                           <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i
-                                   class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i>
+                               <div class="price_box">
+                                   <span class="new_price">{{ number_format($item['price_sale'] ?? 0) }}VND</span>
+                                   <span class="old_price">{{ number_format($item['price_regular'] ?? 0) }}VND</span>
+                               </div>
+                               <ul>
+                                   <form action="{{ url('cart?index') }}" method="POST">
+                                       <input type="hidden" name="productID" value="{{ $item['id'] }}">
+                                       <li><button type="submit" class="btn-no-border-bg tooltip-1"
+                                               data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i
+                                                   class="ti-shopping-cart"></i></button>
+                                       </li>
+                                   </form>
+                               </ul>
                            </div>
-                           <a href="{{url('products-detail/').$item['id']}}">
-                               <h3>{{$item['name']}}</h3>
-                           </a>
-                           <div class="price_box">
-                            <span class="new_price">{{number_format($item['price_sale']??0)}}VND</span>
-                            <span class="old_price">{{number_format($item['price_regular']??0)}}VND</span>
-                           </div>
-                           <ul>
-                               <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left"
-                                       title="Add to favorites"><i class="ti-heart"></i><span>Add to favorites</span></a>
-                               </li>
-                               <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left"
-                                       title="Add to compare"><i class="ti-control-shuffle"></i><span>Add to
-                                           compare</span></a></li>
-                               <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left"
-                                       title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a>
-                               </li>
-                           </ul>
+                           <!-- /grid_item -->
                        </div>
-                       <!-- /grid_item -->
-                   </div>      
-                @endforeach
+                   @endforeach
                </div>
                <!-- /products_carousel -->
            </div>

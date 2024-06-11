@@ -9,6 +9,7 @@
 	<meta name="author" content="Ansonika">
 	<title><?php echo $this->yieldContent('title'); ?></title>
 	<?php echo $this->runChild('layouts.partials.head'); ?>
+	<?php echo $this->yieldContent('css'); ?>
 </head>
 
 <body>

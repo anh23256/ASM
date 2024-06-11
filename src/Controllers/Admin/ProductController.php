@@ -8,10 +8,12 @@ use XuongOop\Salessa\Commons\Helper;
 use XuongOop\Salessa\Models\Category;
 use XuongOop\Salessa\Models\Product;
 use Rakit\Validation\Validator;
+use XuongOop\Salessa\Models\CartDetail;
 
 class ProductController extends Controller
 {
     // khởi tạo thuộc tính
+    private CartDetail $cartDetail;
     private Product $product;
     private Category $category;
 
@@ -19,6 +21,7 @@ class ProductController extends Controller
 
     public function __construct()
     {
+        $this->cartDetail = new CartDetail();
         $this->product = new Product();
         $this->category = new Category();
     }
@@ -26,11 +29,13 @@ class ProductController extends Controller
     public function index()
     {
         // $products = $this->product->all();
+        $categorys = $this->category->all();
         [$products, $totalPage] = $this->product->paginate();
         //truyền tên thư mục sau đó truyền tên file, sau đó dùng dấu chấm để chia tầng
         $this->renderViewAdmin('products.index', [
             'products' => $products,
-            'totalPage' => $totalPage
+            'totalPage' => $totalPage,
+            'categorys'=>$categorys
         ]);
     }
 
@@ -57,6 +62,7 @@ class ProductController extends Controller
             'overview'      => 'max:500', // giới hạn 500 từ
             'content'       => 'max:65000',
             'img_thumbnail' => 'uploaded_file:0,2M,png,jpg,jpeg',
+            'price_regular'         => 'required|max:10'
         ]);
 
         $validation->validate();
@@ -76,6 +82,8 @@ class ProductController extends Controller
                 'overview'      => $_POST['overview'], 
                 'content'       => $_POST['content'],
                 'img_thumbnail' => $_FILES['img_thumbnail'],
+                'price_regular' => $_POST['price_regular'],
+                'price_sale' => empty($_POST['price_sale'])?null: $_POST['price_sale'],
             ];
 
             if (!empty($_FILES['img_thumbnail']) && $_FILES['img_thumbnail']['size'] > 0) {
@@ -138,6 +146,7 @@ class ProductController extends Controller
             'overview'              => 'max:500',
             'content'               => 'max:65000',
             'img_thumbnail'         => 'uploaded_file:0,2048K,png,jpeg,jpg',
+            'price_regular'         => 'required|max:10'
         ]);
         $validation->validate();
 
@@ -152,11 +161,13 @@ class ProductController extends Controller
                 'name'          => $_POST['name'],
                 'overview'      => $_POST['overview'],
                 'content'       => $_POST['content'],
-                'updated_at'    => date('Y-m-d H:i:s')
+                'updated_at'    => date('Y-m-d H:i:s'),
+                'price_regular' => $_POST['price_regular'],
+                'price_sale' => empty($_POST['price_sale'])?null: $_POST['price_sale'],
             ];
-
+            $flagUpload = false;
             if (!empty($_FILES['img_thumbnail']) && $_FILES['img_thumbnail']['size'] > 0) {
-
+                $flagUpload = true;
                 $from = $_FILES['img_thumbnail']['tmp_name'];
                 // to là đường dẫn tới nơi lưu trữ file
                 $to   = 'assets/uploads/' . time() . $_FILES['img_thumbnail']['name'];
@@ -174,7 +185,11 @@ class ProductController extends Controller
 
             $this->product->update($id, $data);
 
-            if ($product['img_thumbnail'] && file_exists( PATH_ROOT . $product['img_thumbnail'] ) ) {
+            if (
+                $flagUpload
+                && $product['img_thumbnail']
+                && file_exists(PATH_ROOT . $product['img_thumbnail'])
+) {
                 unlink(PATH_ROOT . $product['img_thumbnail']);
             }
 
@@ -190,7 +205,8 @@ class ProductController extends Controller
     {
         try {
             $product = $this->product->findByID($id);
-
+            
+            $this->cartDetail->deleteByProduct($id);
             $this->product->delete($id);
 
             if ($product['img_thumbnail'] && file_exists( PATH_ROOT . $product['img_thumbnail'] ) ) {

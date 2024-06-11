@@ -10,6 +10,8 @@
     <title>@yield('title')</title>
 
     @include('layouts.partials.css')
+    @yield('css')
+    @yield('scripts')
 </head>
 
 <body class="crm_body_bg">
@@ -40,6 +42,7 @@
     </div>
 
     @include('layouts.partials.js')
+    @yield('script')
 </body>
 
 <!-- Mirrored from demo.dashboardpack.com/sales-html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 24 May 2024 07:24:13 GMT -->

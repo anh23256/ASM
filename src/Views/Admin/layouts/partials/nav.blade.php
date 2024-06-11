@@ -15,7 +15,18 @@
                 <span>Dashboard</span>
             </a>
         </li>
-
+        <li class>
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="icon_menu">
+                    <img src="{{ asset('assets/admin/img/menu-icon/5.svg') }}" alt>
+                </div>
+                <span>Danh mục sản phẩm</span>
+            </a>
+            <ul>
+                <li><a href="{{ url('admin/categories') }}">Danh sách</a></li>
+                <li><a href="{{ url('admin/categories/create') }}">Thêm mới</a></li>
+            </ul>
+        </li>
         <li class>
             <a class="has-arrow" href="#" aria-expanded="false">
                 <div class="icon_menu">
@@ -40,6 +51,14 @@
                 <li><a href="{{ url('admin/users') }}">Danh sách</a></li>
                 <li><a href="{{ url('admin/users/create') }}">Thêm mới</a></li>
             </ul>
+        </li>
+        <li class>
+            <a href="{{url('admin/order?status=0')}}" aria-expanded="false">
+                <div class="icon_menu">
+                    <img src="{{ asset('assets/admin/img/menu-icon/5.svg') }}" alt>
+                </div>
+                <span>Quản lý đơn hàng</span>
+            </a>
         </li>
     </ul>
 </nav>

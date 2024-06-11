@@ -1,0 +1,201 @@
+<?php $_shouldextend[1]=1; ?>
+<?php $this->startSection('title'); ?>
+ Quản lý đơn hàng
+<?php $this->stopSection(); ?>
+<?php $this->startSection('css'); ?>
+ <style>
+ .thumb_cart {
+ width: 60px;
+ height: 60px;
+ overflow: hidden;
+ margin-right: 10px;
+ float: left;
+ position: relative;
+ background-color: #fff;
+ padding: 5px;
+ box-sizing: content-box;
+ }
+
+ .thumb_cart img {
+ width: 60px;
+ height: auto;
+ position: absolute;
+ left: 50%;
+ top: 50%;
+ -webkit-transform: translate(-50%, -50%) scale(1.1);
+ -moz-transform: translate(-50%, -50%) scale(1.1);
+ -ms-transform: translate(-50%, -50%) scale(1.1);
+ -o-transform: translate(-50%, -50%) scale(1.1);
+ transform: translate(-50%, -50%) scale(1.1);
+ }
+ </style>
+<?php $this->stopSection(); ?>
+<?php $this->startSection('content'); ?>
+ <div class="row justify-content-center">
+ <div class="col-lg-12">
+ <div class="white_card card_height_100 mb_30">
+ <div class="white_card_header">
+ <div class="box_header m-0">
+ <div class="main-title">
+ <h1 class="m-0">Đơn hàng:
+ <?php echo \htmlentities($status == 0 ? 'Chờ xác nhận' : ($status == 1 ? 'Chờ lấy hàng' : ($status == 2 ? 'Đang giao hàng' : ($status == 3 ? 'Đã giao' : ($status == 4 ? 'Đã hủy' : ($status == 5 ? 'Trả hàng' : '')))))??'', ENT_QUOTES, 'UTF-8', false); ?>
+
+ </h1>
+ </div>
+ </div>
+ </div>
+ <div class="white_card_body">
+ <div class="d-flex">
+ <li><a class="btn btn-warning" href="<?php echo \htmlentities(url('admin/order?status=0')??'', ENT_QUOTES, 'UTF-8', false); ?>">Chờ xác nhận</a></li>
+ <li><a class="btn btn-warning" href="<?php echo \htmlentities(url('admin/order?status=1')??'', ENT_QUOTES, 'UTF-8', false); ?>">Chờ giao hàng</a></li>
+ <li><a class="btn btn-warning" href="<?php echo \htmlentities(url('admin/order?status=2')??'', ENT_QUOTES, 'UTF-8', false); ?>">Đang giao hàng</a></li>
+ <li><a class="btn btn-warning" href="<?php echo \htmlentities(url('admin/order?status=3')??'', ENT_QUOTES, 'UTF-8', false); ?>">Đã giao</a></li>
+ <li><a class="btn btn-warning" href="<?php echo \htmlentities(url('admin/order?status=4')??'', ENT_QUOTES, 'UTF-8', false); ?>">Đã hủy</a></li>
+ <li><a class="btn btn-warning" href="<?php echo \htmlentities(url('admin/order?status=5')??'', ENT_QUOTES, 'UTF-8', false); ?>">Hoàn hàng</a></li>
+ </div>
+ <table class="table table-striped">
+ <thead>
+ <?php if(isset($historyOrder1)): ?>
+ <a class="btn btn-danger" href="<?php echo \htmlentities(url('admin/order?') . $history??'', ENT_QUOTES, 'UTF-8', false); ?>">Quay lại</a>
+ <tr>
+ <th>
+ Sản phẩm
+ </th>
+ <th>
+ Tên sản phẩm
+ </th>
+ <th>
+ Số lượng
+ </th>
+ <th>
+ Giá
+ </th>
+ <th>
+
+ </th>
+ </tr>
+ <?php else: ?>
+ <tr>
+ <th>
+ Mã hóa đơn
+ </th>
+ <th>
+ Tên khách hàng
+ </th>
+ <th>
+ Số điện thoại
+ </th>
+ <th>
+ Địa chỉ
+ </th>
+ <th>
+ Thanh toán
+ </th>
+ <th>
+ Thành tiền
+ </th>
+ <th>
+ Trạng thái đơn hàng
+ </th>
+ <th>
+ Thao tác
+ </th>
+ </tr>
+ <?php endif; ?>
+ </thead>
+
+ <!-- phần sản phẩm được thêm vào giỏ hàng -->
+ <tbody>
+ <?php if(!empty($historyOrder1)): ?>
+ <?php $__currentLoopData = $historyOrder1; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $key => $values): $loop = $this->incrementLoopIndices();  ?>
+ <tr>
+ <td>
+ <div class="thumb_cart">
+ <img src="<?php echo \htmlentities(asset($values['img'])??'', ENT_QUOTES, 'UTF-8', false); ?>" class="lazy" alt="Image">
+ </div>
+ </td>
+ <td>
+ <span class="item_cart"><?php echo \htmlentities($values['namesp']??'', ENT_QUOTES, 'UTF-8', false); ?></span>
+ </td>
+ <td>
+ <div>
+ <span class="item_cart"><?php echo \htmlentities($values['quantity']??'', ENT_QUOTES, 'UTF-8', false); ?> sản phẩm</span>
+ </div>
+ </td>
+ <td>
+ <strong
+ class="item_cart"><?php echo \htmlentities($total = number_format($values['price'])??'', ENT_QUOTES, 'UTF-8', false); ?>VND</strong>
+ </td>
+ </tr>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ <?php elseif(!empty($historyOrder)): ?>
+ <?php $__currentLoopData = $historyOrder; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $key => $values): $loop = $this->incrementLoopIndices();  ?>
+ <tr>
+ <td>
+ <span style=" font-weight:bold;">OD-<?php echo \htmlentities($values['id']??'', ENT_QUOTES, 'UTF-8', false); ?></span>
+ </td>
+ <td><?php echo \htmlentities($values['user_name']??'', ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($values['user_phone']??'', ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($values['user_address']??'', ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td>
+ <div>
+ <span><?php echo \htmlentities($values['status_payment'] == 0 ? 'Chưa thanh toán' : ($values['status_payment'] == 1 ? 'Đã thanh toán' : ($values['status_payment'] == 2 ? 'Đã hoàn tiền' : ''))??'', ENT_QUOTES, 'UTF-8', false); ?></span>
+ </div>
+ </td>
+ <td>
+ <strong><?php echo \htmlentities($total = number_format($values['totalOrder'])??'', ENT_QUOTES, 'UTF-8', false); ?>VND</strong>
+ </td>
+ <td>
+ <span class=" text-danger">
+ <?php echo \htmlentities($values['status_delivery'] == 0 ? 'Chờ xác nhận' : ($values['status_delivery'] == 1 ? 'Chờ lấy hàng' : ($values['status_delivery'] == 2 ? 'Đang giao hàng' : ($values['status_delivery'] == 3 ? 'Đã giao' : ($values['status_delivery'] == 4 ? 'Đã hủy' : ''))))??'', ENT_QUOTES, 'UTF-8', false); ?></span>
+ </td>
+ <td>
+ <?php if($values['status_delivery'] < 3): ?>
+ <a href="<?php echo \htmlentities(url('admin/orderUpdate?') . $history . '&click=1' . '&idOder=' . $values['id']??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ class="btn btn-warning">Xác nhận</a>
+ <?php endif; ?>
+ <a href="<?php echo \htmlentities(url('admin/orderdetail?' . $history . '&idOder=') . $values['id']??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ class="btn btn-warning">Chi
+ tiết</a>
+ <?php if($values['status_delivery'] == 0): ?>
+ <a href="<?php echo \htmlentities(url('admin/cancelorder?' . $history . '&idOder=') . $values['id']??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ onclick="return confirm('Bạn có chắc hủy không')"
+ class="btn btn-danger">Hủy
+ đơn</a>
+ <?php elseif($values['status_delivery'] == 4): ?>
+ <a class="btn btn-danger">Đã hủy</a>
+ <?php endif; ?>
+ </td>
+ </tr>
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ <?php endif; ?>
+ </tbody>
+ </table>
+ <div class="pagination__wrapper">
+ <ul class="pagination">
+ <?php if($page > 1): ?>
+ <li><a href="<?php echo \htmlentities(url('admin/order?' . $history . '?page=' . ($page - 1 == 0 ? 1 : $page - 1))??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ class="prev" title="previous page">&#10094;</a></li>
+ <?php endif; ?>
+ <?php for($i = 1; $i <= $totalPage; $i++): ?>
+ <li>
+ <a href="<?php echo \htmlentities(url('admin/order?' . $history . '?page=' . $i)??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ class="<?php echo \htmlentities($page == $i ? 'active' : ''??'', ENT_QUOTES, 'UTF-8', false); ?>"><?php echo \htmlentities($i??'', ENT_QUOTES, 'UTF-8', false); ?></a>
+ </li>
+ <?php endfor; ?>
+ <?php if($page < $totalPage): ?>
+ <li><a href="<?php echo \htmlentities(url('admin/order?' . $history . '?page=' . ($page + 1 > $totalPage ? $totalPage : $page + 1))??'', ENT_QUOTES, 'UTF-8', false); ?>"
+ class="next" title="next page">&#10095;</a></li>
+ <?php endif; ?>
+ </ul>
+ </div>
+ <!-- /cart_actions -->
+ </div>
+ </div>
+ </div>
+ </div>
+<?php $this->stopSection(); ?>
+
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('layouts.master'); } ?>

@@ -15,14 +15,3 @@
 	<!-- BASE CSS -->
 	<link href="{{asset('assets/Client/css/bootstrap.min.css')}}" rel="stylesheet">
 	<link href="{{asset('assets/Client/css/style.css')}}" rel="stylesheet">
-
-	<!-- SPECIFIC CSS -->
-	<link href="{{asset('assets/Client/css/home_1.css')}}" rel="stylesheet">
-	<link href="{{asset('assets/Client/css/about.css')}}" rel="stylesheet">
-	<link href="{{asset('assets/Client/css/faq.css')}}" rel="stylesheet">
-	<link href="{{asset('assets/Client/css/listing.css')}}" rel="stylesheet">
-	<link href="{{asset('assets/Client/css/product_page.css')}}" rel="stylesheet">
-	<link href="{{asset('assets/Client/css/checkout.css')}}" rel="stylesheet">
-	<link href="{{asset('assets/Client/css/cart.css')}}" rel="stylesheet">
-	<!-- YOUR CUSTOM CSS -->
-	<link href="{{asset('assets/Client/css/custom.css')}}" rel="stylesheet">

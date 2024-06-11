@@ -28,6 +28,9 @@ class Model
         $this->queryBuilder = $this->conn->createQueryBuilder();
     }
 
+    public function getConn(){
+        return $this->conn;
+    }
     public function all()
     {
         return $this->queryBuilder
@@ -122,7 +125,6 @@ class Model
             // $query->setValue('name', '?')->setParameter(0, $data['name']);
             // $query->setValue('email', '?')->setParameter(1, $data['email']);
             // $query->setValue('address', '?')->setParameter(2, $data['address']);
-
 
             $index = 0;
             foreach ($data as $key => $value) {
